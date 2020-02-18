@@ -1,4 +1,7 @@
 class Api::V1::UsersController < ApplicationController
+  # not requiring user to be authorized to log into their account
+  skip_before_action :authorized, only: [:create]
+
   def create
     user = User.new(user_params)
     if user.save

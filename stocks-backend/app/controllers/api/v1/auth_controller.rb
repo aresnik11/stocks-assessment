@@ -1,5 +1,5 @@
 class Api::V1::AuthController < ApplicationController
-    # not requiring user to be authorized to log into their account or demo account
+    # not requiring user to be authorized to log into their account
     skip_before_action :authorized, only: [:login]
 
     def login
@@ -24,7 +24,7 @@ class Api::V1::AuthController < ApplicationController
     private
 
     def user_login_params
-        params.require(:user).permit(:email :password)
+        params.require(:user).permit(:email, :password)
     end
   end
   
