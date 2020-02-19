@@ -1,10 +1,13 @@
 import React from 'react'
 import withAuth from './withAuth'
 import Transaction from './Transaction'
+import { Table } from 'semantic-ui-react'
 
 const TransactionsContainer = (props) => {
     const makeTransactions = () => {
-        return props.user.stocks.map(stock => <Transaction key={stock.id} stock={stock} />)
+        // sorts stocks based on id so that they appear in order, with the most recent transaction listed first
+        const sortedStocks = props.user.stocks.sort((a,b) => b.id - a.id)
+        return sortedStocks.map(stock => <Transaction key={stock.id} stock={stock} />)
     }
 
     return (
@@ -12,9 +15,27 @@ const TransactionsContainer = (props) => {
             <h1>Transactions</h1>
             {props.user.stocks.length
             ?
-            makeTransactions()
+            <>
+                <Table color="grey" selectable textAlign="center">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Date</Table.HeaderCell>
+                            <Table.HeaderCell>Action</Table.HeaderCell>
+                            <Table.HeaderCell>Stock Ticker</Table.HeaderCell>
+                            <Table.HeaderCell>Quantity</Table.HeaderCell>
+                            <Table.HeaderCell>Price Per Share</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+                    <Table.Body>
+                        {makeTransactions()}
+                    </Table.Body>
+                </Table>
+            </>
             :
             <h3>You haven't made any transactions yet.</h3>}
+
+            
         </div>
         
     )

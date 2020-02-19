@@ -2,20 +2,26 @@ import React from 'react'
 import withAuth from './withAuth'
 import StockContainer from './StockContainer'
 import BuyStock from './BuyStock'
+import { Grid } from 'semantic-ui-react'
 
 const PortfolioContainer = (props) => {
     return (
-        <div>
-            <StockContainer
-                stocks={props.user.stocks}
-                refreshStocks={props.refreshStocks}
-            />
-            <BuyStock
-                money={props.user.money}
-                buyStockSubmitHandler={props.buyStockSubmitHandler}
-            />
-        </div>
-        
+        <Grid>
+            <Grid.Row>
+                <Grid.Column width={9}>
+                    <StockContainer
+                        stocks={props.user.stocks}
+                        refreshStocks={props.refreshStocks}
+                    />
+                </Grid.Column>
+                <Grid.Column width={7}>
+                    <BuyStock
+                        money={props.user.money}
+                        buyStockSubmitHandler={props.buyStockSubmitHandler}
+                    />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
     )
 }
 

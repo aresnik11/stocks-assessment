@@ -1,5 +1,6 @@
 import React from 'react'
 import Stock from './Stock'
+import { Table } from 'semantic-ui-react'
 
 class StockContainer extends React.Component {
     componentDidMount() {
@@ -60,7 +61,19 @@ class StockContainer extends React.Component {
         return (
             <div>
                 <h1>Portfolio (${this.aggregateValue(stockObj)})</h1>
-                {this.makeStocks(stockObj)}
+                <Table color="grey" selectable textAlign="center">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Stock Ticker</Table.HeaderCell>
+                            <Table.HeaderCell>Quantity</Table.HeaderCell>
+                            <Table.HeaderCell>Total Value</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+                    <Table.Body>
+                        {this.makeStocks(stockObj)}
+                    </Table.Body>
+                </Table>
             </div>
         )
     }

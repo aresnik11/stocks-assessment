@@ -7,6 +7,7 @@ import Signup from './Signup'
 import PortfolioContainer from './PortfolioContainer'
 import Error from './Error'
 import TransactionsContainer from './TransactionsContainer'
+import Nav from './Nav'
 
 class App extends React.Component {
   state = {
@@ -140,13 +141,16 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Switch>
-          <Route exact path="/login" render={() => <Login loginSubmitHandler={this.loginSubmitHandler} />} />
-          <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
-          <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} refreshStocks={this.refreshStocks} />} />
-          <Route exact path="/transactions" render={() => <TransactionsContainer user={this.state.user} />} />
-          <Route component={Error} />
-        </Switch>
+        <Nav logOut={this.logOut} />
+        <div className="main-container">
+          <Switch>
+            <Route exact path="/login" render={() => <Login loginSubmitHandler={this.loginSubmitHandler} />} />
+            <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
+            <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} refreshStocks={this.refreshStocks} />} />
+            <Route exact path="/transactions" render={() => <TransactionsContainer user={this.state.user} />} />
+            <Route component={Error} />
+          </Switch>
+        </div>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import * as moment from 'moment'
+import { Table } from 'semantic-ui-react'
 
 const Transaction = (props) => {
     // pluralizes or singularizes share depending on number of shares
@@ -13,9 +14,13 @@ const Transaction = (props) => {
     }
 
     return (
-        <div>
-            <h1>{formatDate()} - BUY ({props.stock.ticker}) - {props.stock.quantity} {determineShare()} @ {props.stock.purchase_price}</h1>
-        </div>
+        <Table.Row>
+            <Table.Cell>{formatDate()}</Table.Cell>
+            <Table.Cell>Buy</Table.Cell>
+            <Table.Cell>{props.stock.ticker}</Table.Cell>
+            <Table.Cell>{props.stock.quantity} {determineShare()}</Table.Cell>
+            <Table.Cell>{parseFloat(props.stock.purchase_price).toFixed(2)}</Table.Cell>
+        </Table.Row>
     )
 }
 
