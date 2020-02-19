@@ -17,9 +17,6 @@ const Stock = (props) => {
             <Table.Cell>{props.quantity} {determineShare()}</Table.Cell>
             <Table.Cell><span style={spanStyle}>${parseFloat(props.current_price).toFixed(2)}</span></Table.Cell>
         </Table.Row>
-        // <div>
-        //     <h1><span style={spanStyle}>{props.ticker}</span> - {props.quantity} {determineShare()} - <span style={spanStyle}>${parseFloat(props.current_price).toFixed(2)}</span></h1>
-        // </div>
     )
 }
 

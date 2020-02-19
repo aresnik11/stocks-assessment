@@ -29,6 +29,7 @@ class BuyStock extends React.Component {
         return (
             <div>
                 <h1>Cash - ${parseFloat(this.props.money).toFixed(2)}</h1>
+                <br/><br/>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Input
                         name="ticker"
@@ -47,7 +48,10 @@ class BuyStock extends React.Component {
                         value={this.state.quantity}
                         onChange={this.handleChange}
                     />
+                    <br/>
                     <Form.Button
+                        size="large"
+                        color="black"
                         content="Buy"
                     />
                 </Form>

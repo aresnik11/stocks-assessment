@@ -4,12 +4,18 @@ import { Table } from 'semantic-ui-react'
 
 class StockContainer extends React.Component {
     componentDidMount() {
-        this.props.refreshStocks()
+        // if the user has stocks, refresh them
+        if (this.props.stocks.length) {
+            this.props.refreshStocks()
+        }
     }
 
-    // componentDidUpdate() {
-
-    // }
+    componentDidUpdate(prevProps) {
+        // if we added a new stock, refresh all stocks
+        if (prevProps.stocks.length !== this.props.stocks.length) {
+            this.props.refreshStocks()
+        }
+    }
 
     // aggregates list of stocks to an object where the key is the ticker and the value is another object containing quantity, current_price, and color
     aggregateStocks = () => {
@@ -60,20 +66,27 @@ class StockContainer extends React.Component {
         const stockObj = this.aggregateStocks()
         return (
             <div>
-                <h1>Portfolio (${this.aggregateValue(stockObj)})</h1>
-                <Table color="grey" selectable textAlign="center">
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>Stock Ticker</Table.HeaderCell>
-                            <Table.HeaderCell>Quantity</Table.HeaderCell>
-                            <Table.HeaderCell>Total Value</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
+                <h1>Portfolio {this.props.stocks.length ? " - $" + this.aggregateValue(stockObj) : null}</h1>
+                <br/>
+                {this.props.stocks.length
+                ?
+                <>
+                    <Table color="black" selectable textAlign="center">
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>Stock Ticker</Table.HeaderCell>
+                                <Table.HeaderCell>Quantity</Table.HeaderCell>
+                                <Table.HeaderCell>Total Value</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
 
-                    <Table.Body>
-                        {this.makeStocks(stockObj)}
-                    </Table.Body>
-                </Table>
+                        <Table.Body>
+                            {this.makeStocks(stockObj)}
+                        </Table.Body>
+                    </Table>
+                </>
+                :
+                <h3>You don't have any stocks in your portfolio.<br/><br/>Add stocks through the form on the right.</h3>}
             </div>
         )
     }

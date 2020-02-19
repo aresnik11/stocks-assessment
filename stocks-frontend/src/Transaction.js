@@ -19,7 +19,7 @@ const Transaction = (props) => {
             <Table.Cell>Buy</Table.Cell>
             <Table.Cell>{props.stock.ticker}</Table.Cell>
             <Table.Cell>{props.stock.quantity} {determineShare()}</Table.Cell>
-            <Table.Cell>{parseFloat(props.stock.purchase_price).toFixed(2)}</Table.Cell>
+            <Table.Cell>${parseFloat(props.stock.purchase_price).toFixed(2)}</Table.Cell>
         </Table.Row>
     )
 }

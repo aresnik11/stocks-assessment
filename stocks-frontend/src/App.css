@@ -11,9 +11,13 @@
   margin: auto;
 }
 
+.ui.form.login {
+  width: 33%;
+  margin: auto;
+}
+
 .main-container {
-  margin-left: 2%;
-  margin-right: 2%;
+  margin: 2%;
 }
 
 /* makes nav bar background white */

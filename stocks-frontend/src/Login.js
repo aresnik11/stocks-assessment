@@ -29,7 +29,8 @@ class Login extends React.Component {
         return (
             <div>
                 <h1>Log In</h1>
-                <Form onSubmit={this.handleSubmit}>
+                <br/>
+                <Form onSubmit={this.handleSubmit} className="login">
                     <Form.Input
                         name="email"
                         placeholder="Email"
@@ -45,7 +46,10 @@ class Login extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
+                    <br/>
                     <Form.Button
+                        size="large"
+                        color="black"
                         content="Log In"
                     />
                 </Form>

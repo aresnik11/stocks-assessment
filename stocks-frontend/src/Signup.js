@@ -25,7 +25,8 @@ class Signup extends React.Component {
         return (
             <div>
                 <h1>Sign Up</h1>
-                <Form onSubmit={this.handleSubmit}>
+                <br/>
+                <Form onSubmit={this.handleSubmit} className="login">
                     <Form.Input
                         name="name"
                         placeholder="Name"
@@ -48,7 +49,10 @@ class Signup extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
+                    <br/>
                     <Form.Button
+                        size="large"
+                        color="black"
                         content="Sign Up"
                     />
                 </Form>

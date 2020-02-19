@@ -13,10 +13,11 @@ const TransactionsContainer = (props) => {
     return (
         <div>
             <h1>Transactions</h1>
+            <br/>
             {props.user.stocks.length
             ?
             <>
-                <Table color="grey" selectable textAlign="center">
+                <Table color="black" selectable textAlign="center">
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Date</Table.HeaderCell>
@@ -33,9 +34,7 @@ const TransactionsContainer = (props) => {
                 </Table>
             </>
             :
-            <h3>You haven't made any transactions yet.</h3>}
-
-            
+            <h3>You haven't made any transactions yet.<br/><br/>Make a transaction from the portfolio page.</h3>}
         </div>
         
     )
