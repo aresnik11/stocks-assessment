@@ -8,6 +8,7 @@ import PortfolioContainer from './containers/PortfolioContainer'
 import Error from './components/Error'
 import TransactionsContainer from './containers/TransactionsContainer'
 import Nav from './components/Nav'
+import Homepage from './components/Homepage'
 
 class App extends React.Component {
   state = {
@@ -153,6 +154,7 @@ class App extends React.Component {
             <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
             <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} refreshStocks={this.refreshStocks} />} />
             <Route exact path="/transactions" render={() => <TransactionsContainer user={this.state.user} />} />
+            <Route exact path="/" render={() => <Homepage />} />
             <Route component={Error} />
           </Switch>
         </div>

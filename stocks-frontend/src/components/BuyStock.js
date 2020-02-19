@@ -28,7 +28,7 @@ class BuyStock extends React.Component {
     render() {
         return (
             <div>
-                <h1>Cash - ${parseFloat(this.props.money).toFixed(2)}</h1>
+                <h1>Cash: ${parseFloat(this.props.money).toFixed(2)}</h1>
                 <br/><br/>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Input

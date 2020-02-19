@@ -13,8 +13,12 @@ class Nav extends React.Component {
         return (
             <Menu pointing secondary stackable size="huge">
                 <Menu.Item
+                    as={ Link }
+                    to="/"
                     icon="chart line"
-                    name="Super Stocks"
+                    name="super stocks"
+                    active={activeItem === 'super stocks'}
+                    onClick={this.handleItemClick}
                 />
                 <Menu.Item
                     as={ Link }

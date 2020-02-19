@@ -24,3 +24,8 @@
 .ui.huge.pointing.secondary.stackable.menu {
   background-color: white;
 }
+
+/* increases font size on homepage */
+.large-text {
+  font-size: 72px
+}
