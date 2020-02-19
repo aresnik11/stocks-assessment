@@ -118,13 +118,32 @@ class App extends React.Component {
     })
   }
 
+  refreshStocks = () => {
+    fetch("http://localhost:3001/api/v1/refresh_stocks", {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      if (response.errors) {
+        alert(response.errors)
+      }
+      else {
+        this.setState({
+          user: response.user
+        })
+      }
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <Switch>
           <Route exact path="/login" render={() => <Login loginSubmitHandler={this.loginSubmitHandler} />} />
           <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
-          <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} />} />
+          <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} refreshStocks={this.refreshStocks} />} />
           <Route exact path="/transactions" render={() => <TransactionsContainer user={this.state.user} />} />
           <Route component={Error} />
         </Switch>

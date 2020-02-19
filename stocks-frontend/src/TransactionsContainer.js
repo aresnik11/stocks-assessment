@@ -10,7 +10,11 @@ const TransactionsContainer = (props) => {
     return (
         <div>
             <h1>Transactions</h1>
-            {makeTransactions()}
+            {props.user.stocks.length
+            ?
+            makeTransactions()
+            :
+            <h3>You haven't made any transactions yet.</h3>}
         </div>
         
     )

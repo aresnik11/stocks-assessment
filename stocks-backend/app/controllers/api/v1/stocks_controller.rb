@@ -75,6 +75,50 @@ class Api::V1::StocksController < ApplicationController
     end
   end
 
+  def refresh
+    # get just the ticker from the users stock, unique them, and join into a comma separated string
+    tickers = session_user.stocks.map do |stock|
+      stock.ticker
+    end.uniq.join(",")
+
+    # pass the comma separated string of tickers into the batch API call
+    begin
+      response_string = RestClient.get("https://cloud.iexapis.com/stable/stock/market/batch?symbols=#{tickers}&types=quote&token=#{API_KEY}")
+      response_hash = JSON.parse(response_string)
+    rescue
+      nil
+    end
+
+    # loop over the response hash to find the stocks we need to update and update the current_price and color
+    response_hash.each do |key, value|
+      # storing all of the info we need to variables for ease of use later
+      ticker = key
+      current_price = value["quote"]["latestPrice"]
+      change = value["quote"]["latestPrice"]
+      if change > 0
+        color = "green"
+      elsif change < 0
+        color = "red"
+      else
+        color = "grey"
+      end
+
+      # finding the users stocks that match this ticker
+      stocks_to_update = session_user.stocks.filter do |stock|
+        stock.ticker == ticker
+      end
+
+      # for each of those stocks, update the current_price and color attributes
+      stocks_to_update.each do |stock|
+        stock.update(current_price: current_price, color: color)
+      end
+    end
+
+    # send back serialized user which has updated stocks
+    render json: { user: UserSerializer.new(session_user) }
+    
+  end
+
   private
 
   def stock_params

@@ -1,10 +1,18 @@
 import React from 'react'
 import Stock from './Stock'
 
-const StockContainer = (props) => {
+class StockContainer extends React.Component {
+    componentDidMount() {
+        this.props.refreshStocks()
+    }
+
+    // componentDidUpdate() {
+
+    // }
+
     // aggregates list of stocks to an object where the key is the ticker and the value is another object containing quantity, current_price, and color
-    const aggregateStocks = () => {
-        return props.stocks.reduce((obj, stock) => {
+    aggregateStocks = () => {
+        return this.props.stocks.reduce((obj, stock) => {
             // multiplying the price by quantity as a float and rounding to 2 decimal points
             let aggPrice = stock.current_price * stock.quantity
             let aggPriceDecimal = parseFloat(aggPrice).toFixed(2)
@@ -26,7 +34,7 @@ const StockContainer = (props) => {
     }
 
     // reduces all of the stock prices down to one aggregate price of their portfolio
-    const aggregateValue = (stockObj) => {
+    aggregateValue = (stockObj) => {
         const stockKeys = Object.keys(stockObj)
         const aggValue = stockKeys.reduce((sum, stock) => {
             return sum + stockObj[stock]["current_price"]
@@ -35,7 +43,7 @@ const StockContainer = (props) => {
     }
 
     // creates stock components for each of our aggregated stocks
-    const makeStocks = (stockObj) => {
+    makeStocks = (stockObj) => {
         const stockKeys = Object.keys(stockObj)
         return stockKeys.map(stock =>
             <Stock
@@ -47,14 +55,15 @@ const StockContainer = (props) => {
             />
         )
     }
-
-    const stockObj = aggregateStocks()
-    return (
-        <div>
-            <h1>Portfolio (${aggregateValue(stockObj)})</h1>
-            {makeStocks(stockObj)}
-        </div>
-    )
+    render() {
+        const stockObj = this.aggregateStocks()
+        return (
+            <div>
+                <h1>Portfolio (${this.aggregateValue(stockObj)})</h1>
+                {this.makeStocks(stockObj)}
+            </div>
+        )
+    }
 }
 
 export default StockContainer

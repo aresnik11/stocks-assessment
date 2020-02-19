@@ -8,6 +8,7 @@ const PortfolioContainer = (props) => {
         <div>
             <StockContainer
                 stocks={props.user.stocks}
+                refreshStocks={props.refreshStocks}
             />
             <BuyStock
                 money={props.user.money}
