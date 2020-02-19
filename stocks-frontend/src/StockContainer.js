@@ -28,16 +28,14 @@ const StockContainer = (props) => {
     // reduces all of the stock prices down to one aggregate price of their portfolio
     const aggregateValue = (stockObj) => {
         const stockKeys = Object.keys(stockObj)
-        const value = stockKeys.reduce((sum, stock) => {
-            sum += stockObj[stock]["current_price"]
-            return sum
+        const aggValue = stockKeys.reduce((sum, stock) => {
+            return sum + stockObj[stock]["current_price"]
         }, 0)
-        return value.toFixed(2)
+        return aggValue.toFixed(2)
     }
 
     // creates stock components for each of our aggregated stocks
     const makeStocks = (stockObj) => {
-        // const stockObj = aggregateStocks()
         const stockKeys = Object.keys(stockObj)
         return stockKeys.map(stock =>
             <Stock

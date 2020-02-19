@@ -4,7 +4,6 @@ import StockContainer from './StockContainer'
 import BuyStock from './BuyStock'
 
 const PortfolioContainer = (props) => {
-    console.log(props)
     return (
         <div>
             <StockContainer
