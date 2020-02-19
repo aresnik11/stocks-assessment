@@ -4,7 +4,7 @@ import { Table } from 'semantic-ui-react'
 
 class StockContainer extends React.Component {
     componentDidMount() {
-        // if the user has stocks, refresh them
+        // if the user has stocks, refresh them when the component mounts
         if (this.props.stocks.length) {
             this.props.refreshStocks()
         }
