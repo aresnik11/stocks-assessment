@@ -11,27 +11,52 @@ class Nav extends React.Component {
         const { activeItem } = this.state
     
         return (
-            <Menu fixed sticky>
+            <Menu pointing secondary stackable size="huge">
+                <Menu.Item
+                    icon="chart line"
+                    name="Super Stocks"
+                />
                 <Menu.Item
                     as={ Link }
                     to="/portfolio"
-                    name='Portfolio'
-                    active={activeItem === 'Portfolio'}
+                    name='portfolio'
+                    active={activeItem === 'portfolio'}
                     onClick={this.handleItemClick}
                 />            
                 <Menu.Item
                     as={ Link }
                     to="/transactions"
-                    name='Transactions'
-                    active={activeItem === 'Transactions'}
+                    name='transactions'
+                    active={activeItem === 'transactions'}
                     onClick={this.handleItemClick}
                 />
                 <Menu.Menu position='right'>
+                    {/* if user is logged in, show log out. otherwise show log in and sign up */}
+                    {localStorage.token
+                    ?
                     <Menu.Item
-                        name='Log Out'
-                        active={activeItem === 'Log Out'}
+                        name="log out"
+                        active={this.state.activeItem === "log out"}
                         onClick={this.props.logOut}
                     />
+                    :
+                    <>
+                        <Menu.Item
+                            as={ Link }
+                            to="/login"
+                            name="log in"
+                            active={this.state.activeItem === "log in"}
+                            onClick={this.handleItemClick}
+                        />
+                        <Menu.Item
+                            as={ Link }
+                            to="/signup"
+                            name="sign up"
+                            active={this.state.activeItem === "sign up"}
+                            onClick={this.handleItemClick}
+                        />
+                    </>
+                    }
                 </Menu.Menu>
             </Menu>
         )
