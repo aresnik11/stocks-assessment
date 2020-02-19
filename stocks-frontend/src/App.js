@@ -9,6 +9,7 @@ import Error from './components/Error'
 import TransactionsContainer from './containers/TransactionsContainer'
 import Nav from './components/Nav'
 import Homepage from './components/Homepage'
+import Loading from './components/Loading'
 
 class App extends React.Component {
   state = {
@@ -17,6 +18,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // shows loading component until we can hit the heroku backend (can take up to 30 seconds if it needs to "wake up")
+    fetch("https://super-stocks-backend.herokuapp.com/api/v1")
+    .then(() => {
+        this.setState({
+            loading: false
+        })
+    })
     // if there is a token in localStorage, see if we can autologin the user
     if (localStorage.getItem("token")) {
       this.autoLogin()
@@ -144,22 +152,36 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        {/* nav shows on every page */}
-        <Nav logOut={this.logOut} />
-        <div className="main-container">
-          <Switch>
-            <Route exact path="/login" render={() => <Login loginSubmitHandler={this.loginSubmitHandler} />} />
-            <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
-            <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} refreshStocks={this.refreshStocks} />} />
-            <Route exact path="/transactions" render={() => <TransactionsContainer user={this.state.user} />} />
-            <Route exact path="/" render={() => <Homepage />} />
-            <Route component={Error} />
-          </Switch>
+    // shows loading component until we can hit the backend
+    if (this.state.loading) {
+      return (
+          <div className="App">
+              <Nav logOut={this.logOut} />
+              <div className="main-container">
+                  <Loading />
+              </div>
+          </div>
+      )
+    }
+    // render as expected once we're done loading
+    else {
+      return (
+        <div className="App">
+          {/* nav shows on every page */}
+          <Nav logOut={this.logOut} />
+          <div className="main-container">
+            <Switch>
+              <Route exact path="/login" render={() => <Login loginSubmitHandler={this.loginSubmitHandler} />} />
+              <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
+              <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} refreshStocks={this.refreshStocks} />} />
+              <Route exact path="/transactions" render={() => <TransactionsContainer user={this.state.user} />} />
+              <Route exact path="/" render={() => <Homepage />} />
+              <Route component={Error} />
+            </Switch>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
