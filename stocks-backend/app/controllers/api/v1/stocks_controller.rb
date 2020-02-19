@@ -87,7 +87,7 @@ class Api::V1::StocksController < ApplicationController
       response_string = RestClient.get("https://cloud.iexapis.com/stable/stock/market/batch?symbols=#{tickers}&types=quote&token=#{API_KEY}")
       response_hash = JSON.parse(response_string)
     rescue
-      nil
+      render json: { errors: 'Error updating stocks. Please try again.' } and return
     end
 
     # loop over the response hash to find the stocks we need to update and update the current_price and color
