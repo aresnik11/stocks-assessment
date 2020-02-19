@@ -1,7 +1,7 @@
 import React from 'react'
-import withAuth from './withAuth'
+import withAuth from '../components/withAuth'
 import StockContainer from './StockContainer'
-import BuyStock from './BuyStock'
+import BuyStock from '../components/BuyStock'
 import { Grid } from 'semantic-ui-react'
 
 const PortfolioContainer = (props) => {

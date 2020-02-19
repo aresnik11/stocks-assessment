@@ -1,5 +1,5 @@
 import React from 'react'
-import Stock from './Stock'
+import Stock from '../components/Stock'
 import { Table } from 'semantic-ui-react'
 
 class StockContainer extends React.Component {

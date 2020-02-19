@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import { Route, Switch } from 'react-router-dom'
-import Login from './Login'
-import Signup from './Signup'
-import PortfolioContainer from './PortfolioContainer'
-import Error from './Error'
-import TransactionsContainer from './TransactionsContainer'
-import Nav from './Nav'
+import Login from './components/Login'
+import Signup from './components/Signup'
+import PortfolioContainer from './containers/PortfolioContainer'
+import Error from './components/Error'
+import TransactionsContainer from './containers/TransactionsContainer'
+import Nav from './components/Nav'
 
 class App extends React.Component {
   state = {

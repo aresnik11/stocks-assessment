@@ -1,6 +1,6 @@
 import React from 'react'
-import withAuth from './withAuth'
-import Transaction from './Transaction'
+import withAuth from '../components/withAuth'
+import Transaction from '../components/Transaction'
 import { Table } from 'semantic-ui-react'
 
 const TransactionsContainer = (props) => {
