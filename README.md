@@ -1,12 +1,14 @@
 # NYC Tech Talent Pipeline Fullstack Assessment
 
-For this assessment I was asked to implement a web-based stock portfolio app with the user stories listed below. 
+For this assessment I was asked to implement a web-based stock portfolio app with the user stories listed below. I'm calling my app Super Stocks and it can be viewed at [https://super-stocks.netlify.com](https://super-stocks.netlify.com)
 
-<!-- The frontend repo is deployed via Netlify, and the backend repo ([here](https://github.com/aresnik11/booked-backend)) is deployed via Heroku. Visit the site at [https://booked.netlify.com](https://booked.netlify.com).
+The frontend subdirectory is deployed via Netlify and the backend subdirectory is deployed via Heroku.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/73e38dc7-1ee2-4cf8-baf2-52821da94970/deploy-status)](https://app.netlify.com/sites/booked/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8f007487-7e03-401c-bbef-8d9625b0a1c4/deploy-status)](https://app.netlify.com/sites/super-stocks/deploys)
 
-![Booked Books](https://user-images.githubusercontent.com/8761638/69598794-94adeb80-0fd8-11ea-834f-5dd299b52a67.png) -->
+![Super Stocks Portfolio](https://user-images.githubusercontent.com/8761638/74884662-b0a7fb80-5341-11ea-858d-41eae7da4969.png)
+
+![Super Stocks Transactions](https://user-images.githubusercontent.com/8761638/74884670-b4d41900-5341-11ea-8098-e82e85bfeed6.png)
 
 
 ## User Stories
@@ -53,7 +55,7 @@ dynamically to indicate performance.
 
 ## How To Use
 
-<!-- Visit the site at [https://booked.netlify.com](https://booked.netlify.com). -->
+Visit the site at [https://super-stocks.netlify.com](https://super-stocks.netlify.com).
 
 To test on your own machine:
 1. Clone this repository
