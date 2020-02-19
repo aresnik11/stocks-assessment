@@ -14,6 +14,7 @@ const TransactionsContainer = (props) => {
         <div>
             <h1>Transactions</h1>
             <br/>
+            {/* only show transactions table if there are transactions */}
             {props.user.stocks.length
             ?
             <>

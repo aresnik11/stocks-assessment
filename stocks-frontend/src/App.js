@@ -22,6 +22,7 @@ class App extends React.Component {
     }
   }
 
+  // if we can decode the token in localstorage, set the user in state accordingly, otherwise remove the token
   autoLogin = () => {
     fetch("http://localhost:3001/api/v1/auto_login", {
       headers: {
@@ -41,6 +42,7 @@ class App extends React.Component {
     })
   }
 
+  // removes token from localstorage and removes user info stored in state on log out
   logOut = () => {
     localStorage.removeItem("token")
     this.setState({
@@ -96,6 +98,7 @@ class App extends React.Component {
     })
   }
 
+  // creates a new stock in the backend for the user for the ticker and quantity requested
   buyStockSubmitHandler = (stockInfo) => {
     fetch("http://localhost:3001/api/v1/stocks", {
       method: "POST",
@@ -119,6 +122,7 @@ class App extends React.Component {
     })
   }
 
+  // gets the most up to date pricing info for stocks in the users portfolio
   refreshStocks = () => {
     fetch("http://localhost:3001/api/v1/refresh_stocks", {
       headers: {
@@ -141,6 +145,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        {/* nav shows on every page */}
         <Nav logOut={this.logOut} />
         <div className="main-container">
           <Switch>

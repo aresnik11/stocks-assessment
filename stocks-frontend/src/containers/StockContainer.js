@@ -68,8 +68,10 @@ class StockContainer extends React.Component {
         const stockObj = this.aggregateStocks()
         return (
             <div>
+                {/* only show portfolio value if there are stocks in the users portfolio */}
                 <h1>Portfolio {this.props.stocks.length ? " - $" + this.aggregateValue(stockObj) : null}</h1>
                 <br/>
+                {/* only show portfolio table if there are stocks in the users portfolio */}
                 {this.props.stocks.length
                 ?
                 <>

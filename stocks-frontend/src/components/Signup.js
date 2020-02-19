@@ -17,7 +17,7 @@ class Signup extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        // send submitted values to the backend and update redux store
+        // send submitted values to the backend
         this.props.signUpSubmitHandler(this.state)
     }
 
