@@ -2,7 +2,7 @@ import React from 'react'
 import Stock from './Stock'
 
 const StockContainer = (props) => {
-    // aggregates list of stocks to an object where the key is the ticker and the value is another object containing quantity and current_price
+    // aggregates list of stocks to an object where the key is the ticker and the value is another object containing quantity, current_price, and color
     const aggregateStocks = () => {
         return props.stocks.reduce((obj, stock) => {
             // multiplying the price by quantity as a float and rounding to 2 decimal points
@@ -17,7 +17,8 @@ const StockContainer = (props) => {
             else {
                 obj[stock.ticker] = {
                     quantity: stock.quantity,
-                    current_price: parseFloat(aggPriceDecimal)
+                    current_price: parseFloat(aggPriceDecimal),
+                    color: stock.color
                 }
             }
             return obj
@@ -28,7 +29,15 @@ const StockContainer = (props) => {
     const makeStocks = () => {
         const stockObj = aggregateStocks()
         const stockKeys = Object.keys(stockObj)
-        return stockKeys.map(stock => <Stock key={stock} ticker={stock} quantity={stockObj[stock]["quantity"]} current_price={stockObj[stock]["current_price"]} />)
+        return stockKeys.map(stock =>
+            <Stock
+                key={stock}
+                ticker={stock}
+                quantity={stockObj[stock]["quantity"]}
+                current_price={stockObj[stock]["current_price"]}
+                color={stockObj[stock]["color"]}
+            />
+        )
     }
 
     return (

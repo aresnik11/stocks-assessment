@@ -7,8 +7,13 @@ const PortfolioContainer = (props) => {
     console.log(props)
     return (
         <div>
-            <StockContainer stocks={props.user.stocks} />
-            <BuyStock money={props.user.money} buyStockSubmitHandler={props.buyStockSubmitHandler} />
+            <StockContainer
+                stocks={props.user.stocks}
+            />
+            <BuyStock
+                money={props.user.money}
+                buyStockSubmitHandler={props.buyStockSubmitHandler}
+            />
         </div>
         
     )

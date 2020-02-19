@@ -35,10 +35,21 @@ class Api::V1::StocksController < ApplicationController
       end
     end
 
-    # grabbing the current price from the API response
+    # grabbing the current price from the API response and calculaing total price
     current_price = response_hash["latestPrice"]
     total_price = current_price * quantity
     user_money = session_user.money
+
+    # grabbing the change from the API response - this is the change from the latest opening
+    change = response_hash["change"]
+    if change > 0
+      color = "green"
+    elsif change < 0
+      color = "red"
+    else
+      color = "grey"
+    end
+
     # only buy the stock if the user has enough money
     if user_money >= total_price
       stock = Stock.new({
@@ -46,6 +57,7 @@ class Api::V1::StocksController < ApplicationController
         quantity: quantity,
         purchase_price: current_price,
         current_price: current_price,
+        color: color,
         user: session_user
       })
       if stock.save

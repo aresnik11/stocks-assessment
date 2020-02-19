@@ -6,9 +6,13 @@ const Stock = (props) => {
         return props.quantity > 1 ? "shares" : "share"
     }
 
+    const spanStyle = {
+        color: props.color
+    }
+
     return (
         <div>
-            <h1>{props.ticker} - {props.quantity} {determineShare()} - ${props.current_price}</h1>
+            <h1><span style={spanStyle}>{props.ticker}</span> - {props.quantity} {determineShare()} - <span style={spanStyle}>${props.current_price}</span></h1>
         </div>
     )
 }
