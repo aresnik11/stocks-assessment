@@ -1,6 +1,6 @@
-# NYC Tech Talent Pipeline Fullstack Assessment
+# Super Stocks - NYC Tech Talent Pipeline Fullstack Assessment
 
-For this assessment I was asked to implement a web-based stock portfolio app with the user stories listed below. I'm calling my app Super Stocks and it can be viewed at [https://super-stocks.netlify.com](https://super-stocks.netlify.com)
+For this assessment I was asked to implement a web-based stock portfolio app with the user stories listed below. I'm calling my app Super Stocks and it can be viewed at [https://super-stocks.netlify.com](https://super-stocks.netlify.com).
 
 The frontend subdirectory is deployed via Netlify and the backend subdirectory is deployed via Heroku.
 
