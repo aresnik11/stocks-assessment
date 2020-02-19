@@ -24,7 +24,7 @@ class App extends React.Component {
 
   // if we can decode the token in localstorage, set the user in state accordingly, otherwise remove the token
   autoLogin = () => {
-    fetch("http://localhost:3001/api/v1/auto_login", {
+    fetch("https://super-stocks-backend.herokuapp.com/api/v1/auto_login", {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
@@ -52,7 +52,7 @@ class App extends React.Component {
 
   // creates a new user in backend with userInfo provided, sets token in localStorage and sets state with user info if successful
   signUpSubmitHandler = (userInfo) => {
-    fetch("http://localhost:3001/api/v1/signup", {
+    fetch("https://super-stocks-backend.herokuapp.com/api/v1/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ class App extends React.Component {
 
   // verifies if userInfo provided matches user in backend, sets token in localStorage and sets state with user info if successful
   loginSubmitHandler = (userInfo) => {
-    fetch("http://localhost:3001/api/v1/login", {
+    fetch("https://super-stocks-backend.herokuapp.com/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ class App extends React.Component {
 
   // creates a new stock in the backend for the user for the ticker and quantity requested
   buyStockSubmitHandler = (stockInfo) => {
-    fetch("http://localhost:3001/api/v1/stocks", {
+    fetch("https://super-stocks-backend.herokuapp.com/api/v1/stocks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +124,7 @@ class App extends React.Component {
 
   // gets the most up to date pricing info for stocks in the users portfolio
   refreshStocks = () => {
-    fetch("http://localhost:3001/api/v1/refresh_stocks", {
+    fetch("https://super-stocks-backend.herokuapp.com/api/v1/refresh_stocks", {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
