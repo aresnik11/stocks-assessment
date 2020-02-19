@@ -41,10 +41,11 @@ class Api::V1::StocksController < ApplicationController
     user_money = session_user.money
 
     # grabbing the change from the API response - this is the change from the latest opening
+    # sometimes the change value is null after hours for stocks, if that is the case, defaulting to showing in grey
     change = response_hash["change"]
-    if change > 0
+    if !!change && change > 0
       color = "green"
-    elsif change < 0
+    elsif !!change && change < 0
       color = "red"
     else
       color = "grey"
@@ -95,18 +96,21 @@ class Api::V1::StocksController < ApplicationController
       ticker = key
       current_price = value["quote"]["latestPrice"]
       change = value["quote"]["change"]
-      if change > 0
+      # sometimes the change value is null after hours for stocks, if that is the case, defaulting to showing in grey
+      if !!change && change > 0
         color = "green"
-      elsif change < 0
+      elsif !!change && change < 0
         color = "red"
       else
         color = "grey"
       end
 
       # finding the users stocks that match this ticker
-      stocks_to_update = session_user.stocks.filter do |stock|
-        stock.ticker == ticker
-      end
+      # stocks_to_update = session_user.stocks.filter do |stock|
+      #   stock.ticker == ticker
+      # end
+      # updating to use "where" since it is more efficient than filter, runs directly on the DB
+      stocks_to_update = session_user.stocks.where(ticker: ticker)
 
       # for each of those stocks, update the current_price and color attributes
       stocks_to_update.each do |stock|
