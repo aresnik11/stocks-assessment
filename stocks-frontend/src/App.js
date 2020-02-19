@@ -4,14 +4,13 @@ import 'semantic-ui-css/semantic.min.css';
 import { Route, Switch } from 'react-router-dom'
 import Login from './Login'
 import Signup from './Signup'
-import Portfolio from './Portfolio'
+import PortfolioContainer from './PortfolioContainer'
 import Error from './Error'
 
 class App extends React.Component {
   state = {
     loading: true,
-    user: null,
-    stocks: null
+    user: null
   }
 
   componentDidMount() {
@@ -34,11 +33,7 @@ class App extends React.Component {
       }
       else {
         this.setState({
-          user: {
-            id: response.user.id,
-            email: response.user.email
-          },
-          stocks: response.user.stocks
+          user: response.user
         })
       }
     })
@@ -47,8 +42,7 @@ class App extends React.Component {
   logOut = () => {
     localStorage.removeItem("token")
     this.setState({
-      user: null,
-      stocks: null
+      user: null
     })
   }
 
@@ -70,11 +64,7 @@ class App extends React.Component {
       else {
         localStorage.setItem("token", response.token)
         this.setState({
-          user: {
-            id: response.user.id,
-            email: response.user.email
-          },
-          stocks: response.user.stocks
+          user: response.user
         }, () => this.props.history.push("/portfolio"))
       }
     })
@@ -86,7 +76,7 @@ class App extends React.Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Accept": "application/json",
       },
       body: JSON.stringify({user: userInfo})
     })
@@ -98,12 +88,31 @@ class App extends React.Component {
       else {
         localStorage.setItem("token", response.token)
         this.setState({
-          user: {
-            id: response.user.id,
-            email: response.user.email
-          },
-          stocks: response.user.stocks
+          user: response.user
         }, () => this.props.history.push("/portfolio"))
+      }
+    })
+  }
+
+  buyStockSubmitHandler = (stockInfo) => {
+    fetch("http://localhost:3001/api/v1/stocks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({stock: stockInfo})
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      if (response.errors) {
+        alert(response.errors)
+      }
+      else {
+        this.setState({
+          user: response.user
+        })
       }
     })
   }
@@ -114,7 +123,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/login" render={() => <Login loginSubmitHandler={this.loginSubmitHandler} />} />
           <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
-          <Route exact path="/portfolio" render={() => <Portfolio user={this.state.user} />} />
+          <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} />} />
           {/* <Route exact path="/transactions" render={() => <Transactions />} /> */}
           <Route component={Error} />
         </Switch>

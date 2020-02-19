@@ -1,10 +1,10 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 
-class Login extends React.Component {
+class BuyStock extends React.Component {
     state = {
-        email: "",
-        password: ""
+        ticker: "",
+        quantity: ""
     }
 
     // controlled log in forrm
@@ -17,36 +17,38 @@ class Login extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         // send submitted values to the backend
-        this.props.loginSubmitHandler(this.state)
+        this.props.buyStockSubmitHandler(this.state)
         // reset state
         this.setState({
-            email: "",
-            password: ""
+            ticker: "",
+            quantity: ""
         })
     }
 
     render() {
         return (
             <div>
-                <h1>Log In</h1>
+                <h1>Cash - ${this.props.money}</h1>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Input
-                        name="email"
-                        placeholder="Email"
+                        name="ticker"
+                        placeholder="Ticker"
                         required
-                        value={this.state.email}
+                        value={this.state.ticker}
                         onChange={this.handleChange}
                     />
                     <Form.Input
-                        name="password"
-                        type="password"
-                        placeholder="Password"
+                        name="quantity"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="Quantity"
                         required
-                        value={this.state.password}
+                        value={this.state.quantity}
                         onChange={this.handleChange}
                     />
                     <Form.Button
-                        content="Log In"
+                        content="Buy"
                     />
                 </Form>
             </div>
@@ -54,4 +56,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default BuyStock

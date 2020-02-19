@@ -7,8 +7,8 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       # encode the user id (function in application controller)
       token = encode_token(user.id)
-      # send back the user with the token
-      render json: { user: user, token: token }, status: :created
+      # send back the serialized user with the token
+      render json: { user: UserSerializer.new(user), token: token }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :not_acceptable
     end

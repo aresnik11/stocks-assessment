@@ -19,12 +19,6 @@ class Signup extends React.Component {
         e.preventDefault()
         // send submitted values to the backend and update redux store
         this.props.signUpSubmitHandler(this.state)
-        // .then(() => {
-        //     // if the sign up was successful, push to profile page
-        //     if (this.props.currentUser) {
-        //         this.props.history.push("/profile")
-        //     }
-        // })
     }
 
     render() {
@@ -34,25 +28,27 @@ class Signup extends React.Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Input
                         name="name"
-                        placeholder="name"
+                        placeholder="Name"
+                        required
                         value={this.state.name}
                         onChange={this.handleChange}
                     />
                     <Form.Input
                         name="email"
-                        placeholder="email"
+                        placeholder="Email"
+                        required
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
                     <Form.Input
                         name="password"
                         type="password"
+                        required
                         placeholder="Password"
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
                     <Form.Button
-                        className="btn"
                         content="Sign Up"
                     />
                 </Form>
