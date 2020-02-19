@@ -94,7 +94,7 @@ class Api::V1::StocksController < ApplicationController
       # storing all of the info we need to variables for ease of use later
       ticker = key
       current_price = value["quote"]["latestPrice"]
-      change = value["quote"]["latestPrice"]
+      change = value["quote"]["change"]
       if change > 0
         color = "green"
       elsif change < 0

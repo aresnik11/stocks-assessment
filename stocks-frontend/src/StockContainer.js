@@ -52,7 +52,9 @@ class StockContainer extends React.Component {
     // creates stock components for each of our aggregated stocks
     makeStocks = (stockObj) => {
         const stockKeys = Object.keys(stockObj)
-        return stockKeys.map(stock =>
+        // sorts stocks based on ticker so that they appear in order and don't move around when we refresh
+        const sortedStockKeys = stockKeys.sort()
+        return sortedStockKeys.map(stock =>
             <Stock
                 key={stock}
                 ticker={stock}
