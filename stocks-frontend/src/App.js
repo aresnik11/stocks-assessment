@@ -6,6 +6,7 @@ import Login from './Login'
 import Signup from './Signup'
 import PortfolioContainer from './PortfolioContainer'
 import Error from './Error'
+import TransactionsContainer from './TransactionsContainer'
 
 class App extends React.Component {
   state = {
@@ -124,7 +125,7 @@ class App extends React.Component {
           <Route exact path="/login" render={() => <Login loginSubmitHandler={this.loginSubmitHandler} />} />
           <Route exact path="/signup" render={() => <Signup signUpSubmitHandler={this.signUpSubmitHandler} />} />
           <Route exact path="/portfolio" render={() => <PortfolioContainer user={this.state.user} buyStockSubmitHandler={this.buyStockSubmitHandler} />} />
-          {/* <Route exact path="/transactions" render={() => <Transactions />} /> */}
+          <Route exact path="/transactions" render={() => <TransactionsContainer user={this.state.user} />} />
           <Route component={Error} />
         </Switch>
       </div>
